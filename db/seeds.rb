@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+product = Product.new(name: "Bench", price: 299, image_url: "https://dks.scene7.com/is/image/dkscdn/17AU6UTHSTLTYBNCHWGH_is?wid=1400&fmt=jpg", description: "deluxe")
+product.save
+product = Product.new(name: "Dumbbell", price: 99, image_url: "https://images-na.ssl-images-amazon.com/images/I/61EK7IMDkgL._AC_SL1500_.jpg", description: "pair")
+product.save
+product = Product.new(name: "Barbell", price: 199, image_url: "https://freepngimg.com/thumb/gym_equipments/49525-9-barbell-image-free-transparent-image-hq.png", description: "olympic")
+product.save
