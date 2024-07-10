@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/one_product", controller: "products", action: "one_product"
   get "all_products", controller: "products", action: "all_products"
+  get "last_product", controller: "products", action: "last_product"
 end
