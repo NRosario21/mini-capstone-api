@@ -12,13 +12,22 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create(
-      name: "Bench",
-      price: 299,
-      image_url: "https://dks.scene7.com/is/image/dkscdn/17AU6UTHSTLTYBNCHWGH_is?wid=1400\u0026fmt=jpg",
-      description: "deluxe",
+      name: params[:name],
+      price: params[:price],
+      image_url: params[:image_url],
+      description: params[:description],
     )
     render :show
   end
+
+  # def create
+  #   @product = Product.create(
+  #     name: "Bench",
+  #     price: 299,
+  #     image_url: "https://dks.scene7.com/is/image/dkscdn/17AU6UTHSTLTYBNCHWGH_is?wid=1400\u0026fmt=jpg",
+  #     description: "deluxe",
+  #   )
+  #   render :show
 
   def show
     @product = Product.find_by(id: params[:id])
