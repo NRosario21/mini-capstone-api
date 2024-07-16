@@ -13,3 +13,8 @@ product = Product.new(name: "Dumbbell", price: 99, image_url: "https://images-na
 product.save
 product = Product.new(name: "Barbell", price: 199, image_url: "https://freepngimg.com/thumb/gym_equipments/49525-9-barbell-image-free-transparent-image-hq.png", description: "olympic")
 product.save
+
+supplier = Supplier.new(name: "Amazon", email: "amazon@example.com", phone_number: "123456789")
+supplier.save
+supplier = Supplier.new(name: "Overstock", email: "overstock@example.com", phone_number: "987654321")
+supplier.save
