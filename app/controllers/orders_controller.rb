@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @orders = current_user.orders
     render :index
@@ -12,6 +14,8 @@ class OrdersController < ApplicationController
     calculated_total = calculated_subtototal + calculated_tax
     @order = Order.create(
       user_id: current_user.id,
+      product_id: params[:product_id],
+      quantity: params[:quantity],
       subtotal: calculated_subtototal,
       tax: calculated_tax,
       total: calculated_total,
