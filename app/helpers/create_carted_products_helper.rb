@@ -1,0 +1,2 @@
+module CreateCartedProductsHelper
+end

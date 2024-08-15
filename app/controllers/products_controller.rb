@@ -1,13 +1,14 @@
 class ProductsController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
 
-  # def last_product
-  #   @product = Product.last
-  #   render template: "products/show"
-  # end
-
   def index
     @products = Product.all
+
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @products = category.products
+    end
+
     render :index
   end
 
@@ -15,26 +16,16 @@ class ProductsController < ApplicationController
     @product = Product.create(
       name: params[:name],
       price: params[:price],
-      image_url: params[:image_url],
       description: params[:description],
       supplier_id: params[:supplier_id],
     )
-
     if @product.valid?
+      Image.create(product_id: @product.id, url: params[:image_url])
       render :show, status: 200
     else
       render json: { errors: @product.errors.full_messages }, status: 422
     end
   end
-
-  # def create
-  #   @product = Product.create(
-  #     name: "Bench",
-  #     price: 299,
-  #     image_url: "https://dks.scene7.com/is/image/dkscdn/17AU6UTHSTLTYBNCHWGH_is?wid=1400\u0026fmt=jpg",
-  #     description: "deluxe",
-  #   )
-  #   render :show
 
   def show
     @product = Product.find_by(id: params[:id])
@@ -46,10 +37,8 @@ class ProductsController < ApplicationController
     @product.update(
       name: params[:name] || @product.name,
       price: params[:price] || @product.price,
-      image_url: params[:image_url] || @product.image_url,
       description: params[:description] || @product.description,
     )
-
     if @product.valid?
       render :show, status: 200
     else
@@ -60,6 +49,6 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find_by(id: params[:id])
     @product.destroy
-    render json: { message: "Successfully destroyed product" }
+    render json: { message: "Product destroyed successfully!" }
   end
 end
